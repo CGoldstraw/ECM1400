@@ -1,0 +1,5 @@
+import flask as f,datetime as s,covid_data_handler as d,covid_news_handling as n;d.u();d.u(*d.e);n.e(0);k=__name__;u,g,j,r,w,i,o=[],"Exeter",lambda x,c,y:x[0]+", Covid"*c+", News"*y+",,  SRienpgelaet"[x[1]and 1::2],lambda x:f.request.args.get(x),"content",f.Flask(k),lambda x,p:p in x.z and x.s.cancel(x.z.pop(p)[2]);z,l,s=i.route,u.append,s.datetime
+@z('/')
+@z('/index')
+def v():y=r("update");(x:=(y,r("two"),r("repeat"),(s.strptime(y or"0:0","%H:%M")-s.now()).seconds))[1]in d.z|n.z or r("news")and n.k(*x)or r("covid-data")and d.k(*x);o(d,p:=r("update_item"));o(n,p);n.o(r("notif"));d.s.run(0);n.s.run(0);u.clear();e=d.z|n.z;[m in u or l({n.d:m,w:j(e[m],m in d.z,m in n.z)})for m in e];a,b,c=d.h(d.x[d.e[0]]);return f.render_template(template_name_or_list='index.html',location=g,local_7day_infections=d.h(d.x[g])[0],nation_location=d.e[0],national_7day_infections=a,hospital_cases=f"{b} Hospital Cases",deaths_total=f"{c} Deaths",news_articles=n.n,updates=u)
+if k=="__main__":i.run()

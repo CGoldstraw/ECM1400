@@ -1,0 +1,11 @@
+{
+    "dashboard_title": "COVID-19 Dashboard",
+    "dashboard_favicon": "https://i.ibb.co/7nYCWzN/Favicon.png",
+    "covid_nation": "England",
+    "covid_local": "Exeter",
+    "covid_update_interval_seconds": 86400,
+    "news_API_key": "[API_KEY_HERE]",
+    "news_country_code": "gb",
+    "news_update_interval_seconds": 86400,
+    "news_search_terms": "Covid COVID-19 coronavirus"
+}

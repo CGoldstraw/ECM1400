@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2D2D2D" />
+  
+  <title>covid-dashboard-cgoldstraw :: CGoldstraw’s Covid Dashboard documentation</title>
+  
+
+  <link rel="icon" type="image/png" sizes="32x32" href="_static/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="_static/img/favicon-16x16.png">
+  <link rel="index" title="Index" href="genindex.html"/>
+
+  <link rel="stylesheet" href="_static/css/insegel.css"/>
+  <link rel="stylesheet" href="_static/css/custom.css"/>
+
+  <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+      <script type="text/javascript" src="_static/documentation_options.js"></script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+  
+
+  <script src="https://email.tl.fortawesome.com/c/eJxNjUEOgyAQAF8jR7Kw6wIHDh7sP1Cw2mgxgmn6-3JsMqc5zEQfE8dkxOY1KKMUOI3ACFKRJpSW2AAp7ontYIaxI6i7XPJVwyeVfCQ550Os3jLrGSNOLgbdAy6s0PBk2TFNjEbsfq31LB0OnX407pJa5v2faRadwSW63mn5KuLyR9j2tgx3zecanl-55R_-jjPs"></script> 
+</head>
+
+<body>
+  <div id="insegel-container">
+    <header>
+      <div id="logo-container">
+          
+          <h1>covid-dashboard-cgoldstraw</h1>
+          
+      </div>
+      <div id="project-container">
+        
+        <h1>Documentation</h1>
+        
+      </div>
+    </header>
+
+    <div id="content-container">
+
+      <div id="main-content-container">
+        <div id="main-content" role="main">
+          
+  <section id="cgoldstraw-s-covid-dashboard-documentation">
+<h1>CGoldstraw’s Covid Dashboard documentation<a class="headerlink" href="#cgoldstraw-s-covid-dashboard-documentation" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://github.com/CGoldstraw/ECM1400-Covid-Dashboard">Github Repository</a></p>
+<section id="module-covid_dashboard_cgoldstraw.main">
+<span id="main-py"></span><h2>main.py<a class="headerlink" href="#module-covid_dashboard_cgoldstraw.main" title="Permalink to this headline">¶</a></h2>
+<p>Renders recent news articles and COVID data to a dashboard template.</p>
+<p>Uses flask to host a dashboard displaying recent COVID data and news
+articles, with the COVID data location and news search terms decided by
+the user in the config file. Calls events to be handled such as
+scheduling of updates, removal of updates, and removal of news articles.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="covid_dashboard_cgoldstraw.main.index">
+<span class="sig-prename descclassname"><span class="pre">covid_dashboard_cgoldstraw.main.</span></span><span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#covid_dashboard_cgoldstraw.main.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles events and renders recent news and COVID data.</p>
+<p>Checks URL parameters for events (creating and deleting updates,
+and blocking news articles), runs the schedulers to check for any
+scheduled updates, formats pending updates for the website,
+refreshes COVID data and news articles, and renders the template
+with the current data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The html template rendered with the most recent data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-covid_dashboard_cgoldstraw.covid_data_handler">
+<span id="covid-data-handler-py"></span><h2>covid_data_handler.py<a class="headerlink" href="#module-covid_dashboard_cgoldstraw.covid_data_handler" title="Permalink to this headline">¶</a></h2>
+<p>Handles requesting and parsing recent COVID data.</p>
+<p>Requests and processes recent COVID data from the uk_covid19 API.
+Creation and deletion of scheduled updates is also implemented.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="covid_dashboard_cgoldstraw.covid_data_handler.covid_API_request">
+<span class="sig-prename descclassname"><span class="pre">covid_dashboard_cgoldstraw.covid_data_handler.</span></span><span class="sig-name descname"><span class="pre">covid_API_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Exeter'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">location_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'ltla'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#covid_dashboard_cgoldstraw.covid_data_handler.covid_API_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Requests current COVID data from the Cov19API for a given area.</p>
+<p>Uses the Cov19API to request the most recent COVID data for
+a given area. Returns data as a list of comma separated strings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>location</strong> – The requested COVID data location.</p></li>
+<li><p><strong>location_type</strong> – The type of area requested (“nation” or “ltla”).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dictionary containing a csv file containing COVID information
+for an area, indexed by the area’s name.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="covid_dashboard_cgoldstraw.covid_data_handler.create_covid_update">
+<span class="sig-prename descclassname"><span class="pre">covid_dashboard_cgoldstraw.covid_data_handler.</span></span><span class="sig-name descname"><span class="pre">create_covid_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">update_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repeats</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#covid_dashboard_cgoldstraw.covid_data_handler.create_covid_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and schedule a COVID update for a given time in HH:MM.</p>
+<p>Creates a new update with a given name and repeating information,
+calculates seconds difference between the current time the update
+time, then schedules an update with that delay.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>update_time</strong> – Time of the update in HH:MM.</p></li>
+<li><p><strong>update_name</strong> – The identifier of the update.</p></li>
+<li><p><strong>repeats</strong> – Either None or “repeat”.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="covid_dashboard_cgoldstraw.covid_data_handler.first_non_blank_cell">
+<span class="sig-prename descclassname"><span class="pre">covid_dashboard_cgoldstraw.covid_data_handler.</span></span><span class="sig-name descname"><span class="pre">first_non_blank_cell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv_lines</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#covid_dashboard_cgoldstraw.covid_data_handler.first_non_blank_cell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the first cell with data in a column of a csv file.</p>
+<p>Search a column of a csv file for the first non-empty value
+(excluding the first header row) and return its index. Returns -1
+if there is no cell with data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>csv_lines</strong> – Rows of a csv file in a list.</p></li>
+<li><p><strong>column</strong> – The index of the column to be searched.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The index of the first row with data for the given column,
+excluding the first header row, or -1 if no data found.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">csv_lines</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Cats,Dogs,Fish&quot;</span><span class="p">,</span> <span class="s2">&quot;1,,3&quot;</span><span class="p">,</span> <span class="s2">&quot;2,1,3&quot;</span><span class="p">]</span>
+<span class="gp">... </span><span class="n">first_non_blank_cell</span><span class="p">(</span><span class="n">csv_lines</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="covid_dashboard_cgoldstraw.covid_data_handler.parse_csv_data">
+<span class="sig-prename descclassname"><span class="pre">covid_dashboard_cgoldstraw.covid_data_handler.</span></span><span class="sig-name descname"><span class="pre">parse_csv_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv_filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#covid_dashboard_cgoldstraw.covid_data_handler.parse_csv_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a csv file and returns it as a list of strings.</p>
+<p>Reads a csv file in the current directory and returns a list of
+rows, where each row is a string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>csv_filename</strong> – The name of the csv file.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of strings, each representing a row of the csv file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="covid_dashboard_cgoldstraw.covid_data_handler.process_covid_csv_data">
+<span class="sig-prename descclassname"><span class="pre">covid_dashboard_cgoldstraw.covid_data_handler.</span></span><span class="sig-name descname"><span class="pre">process_covid_csv_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">covid_csv_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#covid_dashboard_cgoldstraw.covid_data_handler.process_covid_csv_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Summarises a csv file containing COVID data.</p>
+<p>Takes a csv file containing COVID data, in the format returned
+by the uk_covid19 API, and returns the cases in the last 7 days,
+the current hospital cases, and the cumulative deaths.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>covid_csv_data</strong> – A csv file containing COVID data, with</p></li>
+<li><p><strong>deaths</strong> (<em>cumulative</em>) – </p></li>
+<li><p><strong>cases</strong> (<em>hospital</em>) – </p></li>
+<li><p><strong>columns.</strong> (<em>and daily cases</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A tuple containing the cases in the last 7 days, the current
+hospital cases, and the total deaths.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="covid_dashboard_cgoldstraw.covid_data_handler.read_csv_value">
+<span class="sig-prename descclassname"><span class="pre">covid_dashboard_cgoldstraw.covid_data_handler.</span></span><span class="sig-name descname"><span class="pre">read_csv_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv_row</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#covid_dashboard_cgoldstraw.covid_data_handler.read_csv_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an integer value at a given column in a csv row.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>csv_row</strong> – The comma separated string to read.</p></li>
+<li><p><strong>column</strong> – The index of the column to be read.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The integer value in the specified location if a value exists.
+Returns 0 as a default value if the cell is empty.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">row</span> <span class="o">=</span> <span class="s2">&quot;0,10,20,30,40,50&quot;</span>
+<span class="gp">... </span><span class="n">read_csv_value</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">30</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="covid_dashboard_cgoldstraw.covid_data_handler.run_covid_update">
+<span class="sig-prename descclassname"><span class="pre">covid_dashboard_cgoldstraw.covid_data_handler.</span></span><span class="sig-name descname"><span class="pre">run_covid_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">update_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#covid_dashboard_cgoldstraw.covid_data_handler.run_covid_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enacts a scheduled update and either repeats or deletes it.</p>
+<p>Updates COVID data for the area specified in config.json, and
+schedules a new update if the update repeats, otherwise the
+update is removed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>update_name</strong> – The identifier of the update.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="covid_dashboard_cgoldstraw.covid_data_handler.schedule_covid_updates">
+<span class="sig-prename descclassname"><span class="pre">covid_dashboard_cgoldstraw.covid_data_handler.</span></span><span class="sig-name descname"><span class="pre">schedule_covid_updates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">update_interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#covid_dashboard_cgoldstraw.covid_data_handler.schedule_covid_updates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Schedules a COVID update in a specified number of seconds.</p>
+<p>Calls a COVID update in a specified number of seconds, and creates
+a new update if the identifier is not found.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>update_interval</strong> – The number of seconds until the update.</p></li>
+<li><p><strong>update_name</strong> – The identifier of the update.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-covid_dashboard_cgoldstraw.covid_news_handling">
+<span id="covid-news-handling-py"></span><h2>covid_news_handling.py<a class="headerlink" href="#module-covid_dashboard_cgoldstraw.covid_news_handling" title="Permalink to this headline">¶</a></h2>
+<p>Handles requesting, filtering and formatting recent news articles.</p>
+<p>Uses newsapi.org to request top headlines, and filters them based on
+search terms defined in the config file. Creation and deletion of
+scheduled updates is also implemented.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="covid_dashboard_cgoldstraw.covid_news_handling.block_article">
+<span class="sig-prename descclassname"><span class="pre">covid_dashboard_cgoldstraw.covid_news_handling.</span></span><span class="sig-name descname"><span class="pre">block_article</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#covid_dashboard_cgoldstraw.covid_news_handling.block_article" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes and blocks a news article.</p>
+<p>Adds an article title to the blocked articles to hide the article
+and removes the article from the stored articles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>title</strong> – The title of the article to block.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="covid_dashboard_cgoldstraw.covid_news_handling.create_news_update">
+<span class="sig-prename descclassname"><span class="pre">covid_dashboard_cgoldstraw.covid_news_handling.</span></span><span class="sig-name descname"><span class="pre">create_news_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">update_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repeats</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#covid_dashboard_cgoldstraw.covid_news_handling.create_news_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and schedule a news update for a given time in HH:MM.</p>
+<p>Creates a new update with a given name and repeating information,
+calculates seconds difference between the current time the update
+time, then schedules an update with that delay.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>update_time</strong> – Time of the update in HH:MM.</p></li>
+<li><p><strong>update_name</strong> – The identifier of the update.</p></li>
+<li><p><strong>repeats</strong> – Either None or “repeat”.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="covid_dashboard_cgoldstraw.covid_news_handling.filter_articles">
+<span class="sig-prename descclassname"><span class="pre">covid_dashboard_cgoldstraw.covid_news_handling.</span></span><span class="sig-name descname"><span class="pre">filter_articles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">articles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_terms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#covid_dashboard_cgoldstraw.covid_news_handling.filter_articles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all articles containing a given search term in them.</p>
+<p>Takes a list of articles and filters them by their title, only
+returning articles that contain at least one of the search terms in
+their title.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>articles</strong> – A list of news articles.</p></li>
+<li><p><strong>search_terms</strong> – A space separated string of search terms.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list containing only the articles with titles that contained
+a search term.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="covid_dashboard_cgoldstraw.covid_news_handling.format_article">
+<span class="sig-prename descclassname"><span class="pre">covid_dashboard_cgoldstraw.covid_news_handling.</span></span><span class="sig-name descname"><span class="pre">format_article</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">article</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#covid_dashboard_cgoldstraw.covid_news_handling.format_article" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shortens an article’s contents and removes unnecessary data.</p>
+<p>Format an article for the data structure used on the website by
+removing unnecessary data, shortens the contents to 20 words and
+adds a link to the article in the article’s contents.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>article</strong> – The news article to format.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The new shortened article.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="covid_dashboard_cgoldstraw.covid_news_handling.news_API_request">
+<span class="sig-prename descclassname"><span class="pre">covid_dashboard_cgoldstraw.covid_news_handling.</span></span><span class="sig-name descname"><span class="pre">news_API_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">covid_terms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Covid</span> <span class="pre">COVID-19</span> <span class="pre">coronavirus'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#covid_dashboard_cgoldstraw.covid_news_handling.news_API_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Requests recent filtered top headlines from newsapi.org.</p>
+<p>Sends an API request to newsapi.org, filter the articles by the
+given terms and return the filtered articles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>covid_terms</strong> – Space separated terms to search news articles for.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of news articles, with titles containing at least one
+search term.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="covid_dashboard_cgoldstraw.covid_news_handling.schedule_news_updates">
+<span class="sig-prename descclassname"><span class="pre">covid_dashboard_cgoldstraw.covid_news_handling.</span></span><span class="sig-name descname"><span class="pre">schedule_news_updates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">update_interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#covid_dashboard_cgoldstraw.covid_news_handling.schedule_news_updates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Schedules a news update in a specified number of seconds.</p>
+<p>Calls a news update in a specified number of seconds, and creates a
+new update if the identifier is not found.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>update_interval</strong> – The number of seconds until the update.</p></li>
+<li><p><strong>update_name</strong> – The identifier of the update.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="covid_dashboard_cgoldstraw.covid_news_handling.update_news">
+<span class="sig-prename descclassname"><span class="pre">covid_dashboard_cgoldstraw.covid_news_handling.</span></span><span class="sig-name descname"><span class="pre">update_news</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">update_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#covid_dashboard_cgoldstraw.covid_news_handling.update_news" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates a list of relevant articles with the news API.</p>
+<p>Gathers and formats recent top headlines, adds new unblocked
+headlines to the stored articles. If the update was scheduled,
+the update is either removed or repeated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>update_name</strong> (<em>Optional</em>) – The identifier of the update.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-covid_dashboard_cgoldstraw.config_handler">
+<span id="config-handler-py"></span><h2>config_handler.py<a class="headerlink" href="#module-covid_dashboard_cgoldstraw.config_handler" title="Permalink to this headline">¶</a></h2>
+<p>Handles reading and validating fields in the config file.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="covid_dashboard_cgoldstraw.config_handler.read_config">
+<span class="sig-prename descclassname"><span class="pre">covid_dashboard_cgoldstraw.config_handler.</span></span><span class="sig-name descname"><span class="pre">read_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">fields</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#covid_dashboard_cgoldstraw.config_handler.read_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the config file for given fields.</p>
+<p>Open config.json in the current directory and return the data in
+the fields specified in the arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fields</strong> – Variable number of fields to return from config.json.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list containing the data inside the fields specified by
+the fields argument, in the order that the fields were
+given in. Returns None for any fields with the wrong type.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="covid_dashboard_cgoldstraw.config_handler.validate_field">
+<span class="sig-prename descclassname"><span class="pre">covid_dashboard_cgoldstraw.config_handler.</span></span><span class="sig-name descname"><span class="pre">validate_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#covid_dashboard_cgoldstraw.config_handler.validate_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type checks a given config field.</p>
+<p>Compare a field value’s type with the expected type for that field.
+Return the value if the type matches, otherwise return the default
+value for that field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>field</strong> – The name of the field.</p></li>
+<li><p><strong>value</strong> – The value stored in that field.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Either the value of the field or the default value of the
+field, depending on whether the value is of the expected type.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-covid_dashboard_cgoldstraw.update_handler">
+<span id="update-handler-py"></span><h2>update_handler.py<a class="headerlink" href="#module-covid_dashboard_cgoldstraw.update_handler" title="Permalink to this headline">¶</a></h2>
+<p>Handles formatting, creating, and deleting updates.</p>
+<p>Combines the separate COVID and news update lists, and formats them for
+the website. Also adds and removes updates from these lists after
+user events from the dashboard.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="covid_dashboard_cgoldstraw.update_handler.create_update">
+<span class="sig-prename descclassname"><span class="pre">covid_dashboard_cgoldstraw.update_handler.</span></span><span class="sig-name descname"><span class="pre">create_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sched_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#covid_dashboard_cgoldstraw.update_handler.create_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates new COVID and news updates.</p>
+<p>Uses the parameters in the URL to create updates for COVID data and
+news articles at a given time, with an optional repeating feature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sched_time</strong> – The time of the update in HH:MM format.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="covid_dashboard_cgoldstraw.update_handler.format_update">
+<span class="sig-prename descclassname"><span class="pre">covid_dashboard_cgoldstraw.update_handler.</span></span><span class="sig-name descname"><span class="pre">format_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">update</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">news</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#covid_dashboard_cgoldstraw.update_handler.format_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a string describing an update for the website.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>update</strong> – A dictionary containing update information.</p></li>
+<li><p><strong>covid</strong> – If True, the update affects COVID data.</p></li>
+<li><p><strong>news</strong> – If True, the update affects news articles.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A string containing the time of the update, the data updated,
+and whether the update repeats or not.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">update</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;01:23&quot;</span><span class="p">,</span> <span class="s2">&quot;repeats&quot;</span><span class="p">:</span> <span class="s2">&quot;repeat&quot;</span><span class="p">}</span>
+<span class="gp">... </span><span class="n">format_update</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="go">&quot;01:23, Updates Covid &amp; News, Repeats&quot;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">update</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;12:34&quot;</span><span class="p">,</span> <span class="s2">&quot;repeats&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
+<span class="gp">... </span><span class="n">format_update</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="go">&quot;12:34, Updates News, Doesn&#39;t Repeat&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="covid_dashboard_cgoldstraw.update_handler.format_updates">
+<span class="sig-prename descclassname"><span class="pre">covid_dashboard_cgoldstraw.update_handler.</span></span><span class="sig-name descname"><span class="pre">format_updates</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#covid_dashboard_cgoldstraw.update_handler.format_updates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combine the COVID and news updates into a list.</p>
+<p>Convert the separate update dictionaries into a formatted list
+of updates with titles and contents for the website to render.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="covid_dashboard_cgoldstraw.update_handler.remove_update">
+<span class="sig-prename descclassname"><span class="pre">covid_dashboard_cgoldstraw.update_handler.</span></span><span class="sig-name descname"><span class="pre">remove_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#covid_dashboard_cgoldstraw.update_handler.remove_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes COVID and News updates.</p>
+<p>Removes an update, specified by its name, by cancelling the next
+scheduled event and removing the update from the dictionaries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – The identifier of the update.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+        </div>
+      </div>
+
+      <div id="side-menu-container">
+
+        <div id="search" role="search">
+        <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+            <input type="text" name="q" placeholder="Search..." />
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+        </form>
+</div>
+
+        <div id="side-menu" role="navigation">
+
+          
+  
+    
+  
+  
+    <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">CGoldstraw’s Covid Dashboard documentation</a><ul>
+<li><a class="reference internal" href="#module-covid_dashboard_cgoldstraw.main">main.py</a></li>
+<li><a class="reference internal" href="#module-covid_dashboard_cgoldstraw.covid_data_handler">covid_data_handler.py</a></li>
+<li><a class="reference internal" href="#module-covid_dashboard_cgoldstraw.covid_news_handling">covid_news_handling.py</a></li>
+<li><a class="reference internal" href="#module-covid_dashboard_cgoldstraw.config_handler">config_handler.py</a></li>
+<li><a class="reference internal" href="#module-covid_dashboard_cgoldstraw.update_handler">update_handler.py</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</div>
+  
+
+
+        </div>
+
+        
+
+      </div>
+
+    </div>
+
+<footer>
+    <div id="footer-info">
+        <ul id="build-details">
+            
+                <li class="footer-element">
+                    
+                        <a href="_sources/index.rst.txt" rel="nofollow"> source</a>
+                    
+                </li>
+            
+
+            
+
+            
+        </ul>
+
+        
+            <div id="copyright">
+                &copy; 2021, Charles Goldstraw
+            </div>
+        
+
+        <div id="credit">
+            created with <a href="http://sphinx-doc.org/">Sphinx</a> and <a href="https://github.com/Autophagy/insegel">Insegel</a>
+
+        </div>
+    </div>
+
+    <a id="menu-toggle" class="fa fa-bars" aria-hidden="true"></a>
+
+    <script type="text/javascript">
+      $("#menu-toggle").click(function() {
+        $("#menu-toggle").toggleClass("toggled");
+        $("#side-menu-container").slideToggle(300);
+      });
+    </script>
+
+</footer> 
+
+</div>
+
+</body>
+</html>
