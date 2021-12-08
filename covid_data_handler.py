@@ -59,7 +59,7 @@ def read_csv_value(csv_row: str, column: int) -> int:
 
     Example:
         >>> row = "0,10,20,30,40,50"
-        ... read_csv_value(row, 3)
+        >>> read_csv_value(row, 3)
         30
     """
     value = csv_row.split(",")[column]
@@ -83,7 +83,7 @@ def first_non_blank_cell(csv_lines: list[str], column: int) -> int:
 
     Example:
         >>> csv_lines = ["Cats,Dogs,Fish", "1,,3", "2,1,3"]
-        ... first_non_blank_cell(csv_lines, 1)
+        >>> first_non_blank_cell(csv_lines, 1)
         2
     """
     for i in range(1, len(csv_lines)):

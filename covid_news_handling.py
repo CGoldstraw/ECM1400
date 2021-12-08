@@ -79,10 +79,11 @@ def news_API_request(
 
     filtered_articles = []
     if api_key == "[API_KEY_HERE]":
-        logging.warning("The news API key has not been set in config.json")
-    else:
-        articles = response.json()['articles']
-        filtered_articles = filter_articles(articles, covid_terms)
+        logging.critical("The news API key has not been set in config.json")
+        raise ValueError("The news API key has not been set in config.json")
+
+    articles = response.json()['articles']
+    filtered_articles = filter_articles(articles, covid_terms)
 
     if len(filtered_articles) == 0:
         empty_article = {}

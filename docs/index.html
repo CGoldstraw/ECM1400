@@ -137,7 +137,7 @@ excluding the first header row, or -1 if no data found.</p>
 </dl>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">csv_lines</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Cats,Dogs,Fish&quot;</span><span class="p">,</span> <span class="s2">&quot;1,,3&quot;</span><span class="p">,</span> <span class="s2">&quot;2,1,3&quot;</span><span class="p">]</span>
-<span class="gp">... </span><span class="n">first_non_blank_cell</span><span class="p">(</span><span class="n">csv_lines</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first_non_blank_cell</span><span class="p">(</span><span class="n">csv_lines</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="go">2</span>
 </pre></div>
 </div>
@@ -200,7 +200,7 @@ Returns 0 as a default value if the cell is empty.</p>
 </dl>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">row</span> <span class="o">=</span> <span class="s2">&quot;0,10,20,30,40,50&quot;</span>
-<span class="gp">... </span><span class="n">read_csv_value</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">read_csv_value</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="go">30</span>
 </pre></div>
 </div>
@@ -441,12 +441,12 @@ and whether the update repeats or not.</p>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">update</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;01:23&quot;</span><span class="p">,</span> <span class="s2">&quot;repeats&quot;</span><span class="p">:</span> <span class="s2">&quot;repeat&quot;</span><span class="p">}</span>
-<span class="gp">... </span><span class="n">format_update</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">format_update</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 <span class="go">&quot;01:23, Updates Covid &amp; News, Repeats&quot;</span>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">update</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;12:34&quot;</span><span class="p">,</span> <span class="s2">&quot;repeats&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
-<span class="gp">... </span><span class="n">format_update</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">format_update</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 <span class="go">&quot;12:34, Updates News, Doesn&#39;t Repeat&quot;</span>
 </pre></div>
 </div>

@@ -40,11 +40,11 @@ def format_update(update: dict[str], covid: bool, news: bool) -> str:
 
     Examples:
         >>> update = {"time": "01:23", "repeats": "repeat"}
-        ... format_update(update, True, True)
+        >>> format_update(update, True, True)
         "01:23, Updates Covid & News, Repeats"
 
         >>> update = {"time": "12:34", "repeats": None}
-        ... format_update(update, False, True)
+        >>> format_update(update, False, True)
         "12:34, Updates News, Doesn't Repeat"
     """
     data = [update["time"]]
