@@ -1,7 +1,9 @@
 # ECM1400 Covid Dashboard - Charlie Goldstraw
-This program is a dashboard containing current COVID data and news articles relating to COVID-19. The user can schedule updates to the COVID and news data, remove news articles, and cancel scheduled updates. The dashboard is designed to be run locally in flask.
+This is my Continuous Assessment submission for the ECM1400 Programming module, and follows the tasks in the [specification](meta/CA-specification.pdf). This solution was awarded 92%.
 
-This was made as the Continuous Assessment for the ECM1400 Programming module, and follows the tasks in the [specification](meta/CA-specification.pdf).
+An unassessed code golf version of the task is in the [advanced](advanced) directory.
+
+This program is a dashboard containing current COVID data and news articles relating to COVID-19. The user can schedule updates to the COVID and news data, remove news articles, and cancel scheduled updates. The dashboard is designed to be run locally in flask.
 
 Screenshot:
 ![Screenshot of the dashboard](meta/screenshot.png "Screenshot")
