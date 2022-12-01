@@ -1,5 +1,5 @@
 # ECM1400 Covid Dashboard - Charlie Goldstraw
-This is my Continuous Assessment submission for the ECM1400 Programming module, and follows the tasks in the [specification](meta/CA-specification.pdf). This solution was awarded 92%.
+This is my Continuous Assessment submission for the ECM1400 Programming module, and follows the tasks in the [specification](meta/CA-specification.pdf).
 
 An unassessed code golf version of the task is in the [advanced](advanced) directory.
 
